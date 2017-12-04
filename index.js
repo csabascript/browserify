@@ -286,14 +286,8 @@ Browserify.prototype.ignore = function (file, opts) {
         return this;
     }
     var basedir = defined(opts.basedir, process.cwd());
-
-    // Handle relative paths
-    if (file[0] === '.') {
-        this._ignore.push(path.resolve(basedir, file));
-    }
-    else {
-        this._ignore.push(file);
-    }
+    this._ignore.push(file);
+    this._ignore.push('/' + relativePath(basedir, file));
     return this;
 };
 
